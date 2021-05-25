@@ -41,7 +41,7 @@ class ProductDetail(DetailView):
 class ProductNew(CreateView):
     model = Product
     fields = ['name', 'category', 'description', 'price']
-    template_name = 'productapp/product_add.html'
+    template_name = 'productapp/product_new.html'
     success_url = reverse_lazy('product:product_list')
 
 
