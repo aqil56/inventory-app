@@ -10,5 +10,6 @@
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {{ product.description }} <br>
     {{ product.category }} <br>
-    ${{ product.price }} <br>
+    ${{ product.price }} <br> <br>
+    <a href="{% url 'product:product_list' %}" > Back To Products </a>
 {% endblock content %}

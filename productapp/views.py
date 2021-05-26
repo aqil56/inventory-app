@@ -14,7 +14,8 @@ from productapp.models import Product, Category
 class ProductList(ListView):
     template_name = 'productapp/product_list.html'
     model = Product
-    context_object_name= 'products'
+    context_object_name = 'products'
+    extra_context = {'categories': Category.objects.all()}
 
 
 # def ProductDetail(request, id):
@@ -25,7 +26,6 @@ class ProductDetail(DetailView):
     model = Product
     template_name = 'productapp/product_detail.html'
     context_object_name = 'product'
-    extra_context = {'category': Category.objects.all()}
 
 
 # def ProductNew(request):
@@ -40,17 +40,18 @@ class ProductDetail(DetailView):
 #             return redirect('product_detail', pk=post.pk)
 #         return render(request, 'productapp/product_new.html', {'form': form})
 
-class ProductNew(LoginRequiredMixin,CreateView):
+class ProductNew(LoginRequiredMixin, CreateView):
     model = Product
     fields = '__all__'
     exclude = ['user']
     template_name = 'productapp/product_new.html'
     success_url = reverse_lazy('product:product_list')
-    login_url= 'login'
+    login_url = 'login'
 
-    def form_valid(self, form): #MRO
-        form.instance.user = self.request.user # logged in user
+    def form_valid(self, form):  # MRO
+        form.instance.user = self.request.user  # logged in user
         return super(ProductNew, self).form_valid(form)
+
 
 class ProductUpdate(UpdateView):
     model = Product

@@ -3,17 +3,22 @@
 {% block title %}Product List{% endblock title %}
 
 {% block content %}
+
 <h1>Products</h1>
     {% if products %}
-        <table>
-        {% for product in products %}
-            <tr><td>&nbsp;&nbsp;&nbsp;</td><td><a href="{% url 'product:product_detail' product.id %}"><h3>{{ product.name }}</h3></a></td>
+        {% for category in categories %}
+            <h2>{{category}}</h2>
+            <table>
+            {% for product in products %}
+                {% if product.category == category %}
+                <tr><td>&nbsp;&nbsp;&nbsp;</td><td><a href="{% url 'product:product_detail' product.id %}"><h3>{{ product.name }}</h3></a></td>
 
-                <td><a href="{% url 'product:product_update' product.id %}" > Edit </a></td>
-                <td><a href="{% url 'product:product_delete' product.id %}" > Delete </a></td></tr>
-            {% empty %}
-        {% endfor %}
-        </table>
+                    <td><a href="{% url 'product:product_update' product.id %}" > Edit </a></td>
+                    <td><a href="{% url 'product:product_delete' product.id %}" > Delete </a></td></tr>
+                {% endif %}
+            {% endfor %}
+            </table>
+        {% endfor %}    
     {% else %}
         <p>No products are available.</p>
     {% endif %}
