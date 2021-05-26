@@ -3,7 +3,7 @@
 {% block title %}Create New Product{% endblock title %}
 
 {% block content %}
-    <form method="post" action="{% url 'product:product_new' %}">
+    <form method="post" action="{% url 'product:product_new' %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" value="Save">Save</button>

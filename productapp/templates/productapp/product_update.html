@@ -1,18 +1,12 @@
 {% extends '../base.html' %}
 
-{% block title %}Blog List{% endblock title %}
+{% block title %}Update Product{% endblock title %}
 
 {% block content %}
-{{ blogs }}
-    {% if blogs %}
-        <table>
-        {% for blog in blogs %}
-            <tr><td>&nbsp;&nbsp;&nbsp;</td><td><a href="{% url 'product:product_detail' product.id %}">{{ product.name }}</a></td><td>
-                <td><a href="{% url 'product:product_update' product.id %}" > Edit </a></td></tr>
-            {% empty %}
-        {% endfor %}
-        </table>
-    {% else %}
-        <p>No blogs are available.</p>
-    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" value="Save">Save</button>
+        <a href="{% url 'product:product_list' %}" > Cancel </a>
+    </form>
 {% endblock content %}

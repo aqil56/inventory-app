@@ -3,7 +3,7 @@
 {% block title %}Product Detail{% endblock title %}
 
 {% block content %}
-    {% if product.image %}
+    {% if product.image and product.image != 1 %}
     <img src='{{product.image.url}}'>
     {% endif %}
     <h1>{{ product.name }}</h1>

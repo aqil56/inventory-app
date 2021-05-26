@@ -60,6 +60,10 @@ class ProductUpdate(UpdateView):
     template_name = 'productapp/product_update.html'
     success_url = reverse_lazy('product:product_list')
 
+    def form_valid(self, form):  # MRO
+        form.instance.user = self.request.user  # logged in user
+        return super(ProductUpdate, self).form_valid(form)
+
 
 class ProductDelete(DeleteView):
     model = Product
