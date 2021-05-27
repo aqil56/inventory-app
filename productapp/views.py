@@ -53,12 +53,13 @@ class ProductNew(LoginRequiredMixin, CreateView):
         return super(ProductNew, self).form_valid(form)
 
 
-class ProductUpdate(UpdateView):
+class ProductUpdate(LoginRequiredMixin, UpdateView):
     model = Product
     fields = '__all__'
     exclude = ['user']
     template_name = 'productapp/product_update.html'
     success_url = reverse_lazy('product:product_list')
+    login_url = 'login'
 
     def form_valid(self, form):  # MRO
         form.instance.user = self.request.user  # logged in user
