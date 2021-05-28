@@ -15,7 +15,9 @@ class ProductList(ListView):
     template_name = 'productapp/product_list.html'
     model = Product
     context_object_name = 'products'
-    extra_context = {'categories': Category.objects.all()}
+    extra_context = {'categories': Category.objects.all()} # you don't have to send this extra context from here since these 2 are related entities. 
+    
+    # You can get the list of all the categories using 'products.product.all' in template where 1) products is  context_object_name  2) product is related name and 3) all is the DB API
 
 
 # def ProductDetail(request, id):
